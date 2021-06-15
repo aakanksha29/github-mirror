@@ -1,0 +1,28 @@
+Install a gitlab runner
+1. Follow https://docs.gitlab.com/runner/install/ to install runner on a VM. 
+
+2. Follow below steps to register runner
+
+	As of 4/1 please follow this procedure for downloading an mTLS Access Certificate:
+
+	Go to the https://docs.pages.rosetta.ericssondevops.com/kb/edpctl-core/ and select Installing RCLI in the navigation pane on the left-hand side (first item from the top).
+
+	In the Installing RCLI section scroll down to Pre-Release v.Next (Bleeding) and copy the CURL command that applies to your local laptop operating system
+
+	Open a terminal window on your laptop, go to a directory of your choice, paste the CURL command, and execute it.
+
+	Run ls -lsa on the directory where you have executed the CURL command and look for the file named 'rcli'. Make it excutable by entering chmod +x rcli.
+
+	Now run rcli login . If necessary, copy the URL that is output in the terminal window to a browser or go to the browser window that has opened up automatically.
+
+	Log in to Endeavor.
+	Pick the 'Gitlab' group from the drop-down list that applies to your project. Subsequently hit the blue Authenticate button.
+
+	Back in your terminal window look for the contents in the directory: ~/.config/edpctl/auth
+
+	Deal with the two .PEM files you wi	ll find in the way described on the HTTPS Automated Access to Rosetta page.
+
+
+	Register a Gitlab runner
+
+	gitlab-runner --debug register --non-interactive --tls-cert-file /srv/client.pem --tls-key-file /srv/client-key.pem --name ejlakia-test --url https://gitlab.rosetta.ericssondevops.com/ --registration-token wq4cCKmfVUNSf-y9Lysm --tag-list <tag> --executor docker --docker-image alpine:latest
